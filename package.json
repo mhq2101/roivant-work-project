@@ -1,0 +1,24 @@
+{
+  "name": "personal_website",
+  "version": "1.0.0",
+  "description": "Mikhail Qader's personal website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "email": "^0.2.6",
+    "express": "^4.15.5",
+    "mandrill-api": "^1.0.45",
+    "nodemailer": "^4.6.0",
+    "nunjucks": "^3.0.1",
+    "pg": "6.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.11.3",
+    "volleyball": "^1.4.1"
+  }
+}

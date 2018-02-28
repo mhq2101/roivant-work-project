@@ -1,0 +1,44 @@
+{% extends "layout.html" %} {% block content %}
+<!-- The Contact Section -->
+<div class="w3-container w3-content" style="max-width:800px; padding-top:128px" id="contact">
+  <h2 class="w3-wide w3-center">CONTACT</h2>
+  <div class="w3-row w3-padding-32">
+    <div class="w3-col m6 w3-large w3-margin-bottom">
+      <i class="fa fa-map-marker" style="width:30px"></i> Viaduktstrasse 8 4051 Basel, Switzerland
+      <br>
+    </div>
+    <div class="w3-col m6">
+      <form action="/email" method="POST" target="_blank">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Name" required name="name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Subject" required name="subject">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Message" required name="message">
+        <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Add Google Maps -->
+<div id="googleMapBasel" style="height:400px;"></div>
+<script>
+  function myMap() {
+    myCenter = new google.maps.LatLng(47.549084, 7.587617);
+    var mapOptions = {
+      center: myCenter,
+      zoom: 12, scrollwheel: true, draggable: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("googleMapBasel"), mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: myCenter,
+    });
+    marker.setMap(map);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCa6ReY410DIap3E-ZcwstJeEWke4Rb5Y&callback=myMap"></script> {% endblock %}
