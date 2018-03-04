@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <!-- Custom Theme files -->
-  <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-  <link rel="stylesheet" href="css/w3.css">
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+  <link href="/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+  <link rel="stylesheet" href="/css/w3.css">
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="all">
   <!-- js -->
-  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="/js/jquery-2.2.3.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="/js/socket.js"></script>
   <!-- //js -->
 </head>
 
@@ -18,10 +20,19 @@
   <div class="w3-top overflow">
     <div class="w3-bar w3-padding w3-card navbar overflow">
       <a href="/" class="w3-bar-item w3-button">
-        <img class=logo src="images/ocuvant-logo.png">
+        <img class=logo src="/images/ocuvant-logo.png">
       </a>
+
       <!-- Float links to the right. Hide them on small screens -->
-      <div class="w3-right w3-hide-small overflow">
+      <div class="w3-right w3-hide-small">
+        <div class="w3-bar-item">
+          <form id="search" action='/search'>
+            <input type="text" placeholder="Search.." name="search" style="width:200px">
+            <button type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
         <div class="w3-bar-item w3-dropdown-hover overflow">
           <a href="#projects" class="w3-bar-item w3-button ">PIPELINE</a>
           <div class="w3-dropdown-content w3-bar-block">
@@ -38,21 +49,39 @@
         </div>
         <div class="w3-bar-item  w3-dropdown-hover overflow">
           <a href="/#about" class="w3-bar-item w3-button">ABOUT US+</a>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/#about" class="w3-bar-item ">Our Team</a>
+            <a href="/test" class="w3-bar-item ">Latest News</a>
+          </div>
 
         </div>
         <div class="w3-bar-item  w3-dropdown-hover overflow">
           <a href="/contact" class="w3-bar-item w3-button">CONTACT US</a>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/chat" class="w3-bar-item ">Live Chat!</a>
+            <a href="/contact" class="w3-bar-item ">Send Us a Note!</a>
+          </div>
         </div>
+        {%if user %}
+        <div class="w3-bar-item  w3-dropdown-hover overflow">
+          <a href="/#" class="w3-bar-item w3-button">Admin</a>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/chat" class="w3-bar-item ">Chat Boxes</a>
+            <a href="/contact" class="w3-bar-item ">Analytics</a>
+            <a href="/contact" class="w3-bar-item ">Notfications</a>
+          </div>
+        </div>
+        {%endif%}
       </div>
     </div>
   </div>
 
   {% block content %}{% endblock %}
 
-  <footer class="w3-container w3-teal">
-      <h5>Footer</h5>
-      <p>Footer information goes here</p>
-    </footer>
+  <!-- <footer class="w3-container w3-teal">
+    <h5>Footer</h5>
+    <p>Footer information goes here</p>
+  </footer> -->
 
 </body>
 <script type="text/javascript"> 

@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<div class="bgimg-3 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white">
+      <span class="w3-padding w3-black w3-opacity-min">
+        Ocuvant
+      </span>
+      <span class="w3-hide-small w3-text-light-grey">News</span>
+    </h1>
+  </div>
+</div>
+
+<div class="w3-container w3-padding-64 w3-threequarter w3-border">
+  <h1 style="padding:64px">{{article.title}}</h1>
+  {{article.content | safe}}
+</div>
+
+<div class="w3-container w3-quarter w3-padding-64 w3-text-black">
+  <h2>Latest News</h2>
+  <ul class="w3-ul">
+      {% for new in allNews %}
+      <li><a href="/test/{{new.id}}">{{new.title}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

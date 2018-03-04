@@ -13,12 +13,21 @@
     "body-parser": "^1.18.2",
     "email": "^0.2.6",
     "express": "^4.15.5",
+    "html2plaintext": "^2.0.1",
     "mandrill-api": "^1.0.45",
     "nodemailer": "^4.6.0",
     "nunjucks": "^3.0.1",
     "pg": "6.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.11.3",
-    "volleyball": "^1.4.1"
+    "socket.io": "^2.0.4",
+    "volleyball": "^1.4.1",
+    "passport" : "~0.3.2",         
+    "passport-local" : "~1.0.0",
+    "connect-flash" : "~0.1.1",     
+    "bcrypt-nodejs" : "latest",
+    "cookie-parser": "~1.4.3",
+    "method-override": "~2.3.6",
+    "express-session": "~1.14.1" 
   }
 }

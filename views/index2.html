@@ -2,6 +2,11 @@
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle w3-margin-top w3-center">
     <h1 class="w3-xxlarge w3-text-white">
+        {% if user %}
+        <span class="w3-padding w3-black w3-opacity-min">
+            <b>Welcome {{user.email}}</b>
+          </span>
+        {% endif %}
       <span class="w3-padding w3-black w3-opacity-min">
         <b>Ocuvant</b>
       </span>
@@ -16,7 +21,7 @@
     </h1>
 
   <div class="w3-row w3-border w3-border-red w3-hover-border-green">
-    <h2>Darapladib</h2>
+      <a href="/darapladib"><h2>Darapladib</h2></a>
     <div class="w3-col m6 w3-center w3-padding-large">
       <p>
         <b>
@@ -46,9 +51,9 @@
     
 
   
-  <h3 class="w3-center" style="padding:35px">MACULAR EDEMA</h3>
+  <a><h3 class="w3-center" style="padding:35px">MACULAR EDEMA</h3></a>
   <p class="w3-center">
-    <em>What is Macular Edema</em>
+    <a href="/macular-edema"><em>What is Macular Edema</em></a>
   </p>
   <p>Macular edema is the build-up of fluid in the macula, an area in the center of the retina. The retina is the light-sensitive
     tissue at the back of the eye and the macula is the part of the retina responsible for sharp, straight-ahead vision.
@@ -58,7 +63,7 @@
   </p>
   <p>Macular edema occurs when there is abnormal leakage and accumulation of fluid in the macula from damaged blood vessels
     in the nearby retina. A common cause of macular edema is diabetic retinopathy, a disease that can happen to people with
-    diabetes. Macular edema can also occur after eye surgery, in association with age-related macular degeneration, or as
+    <strong>diabetes</strong>. Macular edema can also occur after eye surgery, in association with age-related macular degeneration, or as
     a consequence of inflammatory diseases that affect the eye. Any disease that damages blood vessels in the retina can
     cause macular edema.</p>
 
@@ -77,7 +82,7 @@
 
 <div class="w3-row-padding w3-grayscale" id="about">
   <div class="w3-col l3 m6 w3-margin-bottom">
-    <img src="images/vivek.jpg" alt="John" style="width:100%">
+    <img src="/images/vivek.jpg" alt="John" style="width:100%">
     <h3>John Doe</h3>
     <p class="w3-opacity">CEO & Founder</p>
     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -86,7 +91,7 @@
     </p>
   </div>
   <div class="w3-col l3 m6 w3-margin-bottom">
-    <img src="images/dan.jpg" alt="Jane" style="width:100%">
+    <img src="/images/dan.jpg" alt="Jane" style="width:100%">
     <h3>Jane Doe</h3>
     <p class="w3-opacity">Architect</p>
     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -104,7 +109,7 @@
     </p>
   </div>
   <div class="w3-col l3 m6 w3-margin-bottom">
-    <img src="images/Bill.jpg" alt="Dan" style="width:100%">
+    <img src="/images/Bill.jpg" alt="Dan" style="width:100%">
     <h3>Dan Star</h3>
     <p class="w3-opacity">Architect</p>
     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
