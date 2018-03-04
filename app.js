@@ -15,8 +15,9 @@ var session = require('express-session');
 
 require('./config/passport')(passport); // pass passport for configuration
 
+var admins = {}
 
-
+var chatRooms = {}
 
 module.exports = app;
 
@@ -83,13 +84,26 @@ app.get('/partners', function (req, res) {
   res.render('partners', sendObj)
 })
 app.get('/chat', function (req, res) {
+
   var sendObj = {}
   if (req.user) {
-    console.log(req.user)
     sendObj.user = req.user
   }
+  sendObj.sessionID = req.sessionID;
   res.render('chat', sendObj)
 })
+
+app.get('/chatboxes', function (req, res) {
+  var sendObj = {}
+  if (req.user) {
+    sendObj.user = req.user
+  }
+  console.log(Object.values(chatRooms))
+  sendObj.chats = Object.values(chatRooms)
+  console.log(sendObj)
+  res.render('chatboxes', sendObj)
+})
+
 app.get('/test', function (req, res) {
   var sendObj = {}
   if (req.user) {
@@ -210,7 +224,6 @@ app.post('/signup', passport.authenticate('local-signup', {
   failureFlash: true // allow flash messages
 }));
 app.get('/profile', isLoggedIn, function (req, res) {
-  console.log(req.user)
   res.render('profile', {
     user: req.user // get the user out of session and pass to template
   });
@@ -238,6 +251,8 @@ models.db.sync()
     });
   })
 
+
+
 io.on('connection', function (socket) {
   console.log('a user connected');
 
@@ -247,9 +262,33 @@ io.on('connection', function (socket) {
 
   //socket message listener
   socket.on("message", function (message) {
-    console.log(message)
-    socket.broadcast.emit('message', message)
+    socket.broadcast.to(socket.room).emit('message', message)
   })
 
+  socket.on('admin', (admin) => {
+    admins[admin] = socket;
+    socket.join('admins')
+  })
 
+  socket.on('joinChatRoom', room => {
+    console.log(room)
+    socket.join(room)
+    socket.room = room
+    io.to('admins').emit('newChat', room)
+    chatRooms[room] = {
+      name: room,
+      admins: []
+    }
+    console.log(Object.values(chatRooms))
+  })
+
+  socket.on('adminJoin', (room, admin) => {
+    socket.join(room)
+    socket.room = room
+    socket.broadcast.to(room).emit('adminJoin')
+    var copy = chatRooms[room].admins.slice();
+    copy.push(admin)
+    chatRooms[room].admins = copy
+    console.log('joined')
+  })
 });

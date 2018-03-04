@@ -17,11 +17,18 @@
 </head>
 
 <body>
+    {%if user %}
+    <div id="user" style="display:none">{{user.email}}</div>
+    {%endif%}
+
+    <div id="sessionID" style="display:none">{{sessionID}}</div>
+
   <div class="w3-top overflow">
     <div class="w3-bar w3-padding w3-card navbar overflow">
       <a href="/" class="w3-bar-item w3-button">
         <img class=logo src="/images/ocuvant-logo.png">
       </a>
+      
 
       <!-- Float links to the right. Hide them on small screens -->
       <div class="w3-right w3-hide-small">
@@ -63,7 +70,7 @@
           </div>
         </div>
         {%if user %}
-        <div class="w3-bar-item  w3-dropdown-hover overflow">
+        <div  class="w3-bar-item  w3-dropdown-hover overflow">
           <a href="/#" class="w3-bar-item w3-button">Admin</a>
           <div class="w3-dropdown-content w3-bar-block">
             <a href="/chat" class="w3-bar-item ">Chat Boxes</a>
