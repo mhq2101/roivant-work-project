@@ -1,27 +1,25 @@
 {% extends "layout.html" %} {% block content %}
 
 <div class="bgimg-3 w3-display-container w3-opacity-min" id="home">
-    <div class="w3-display-middle w3-margin-top w3-center">
-      <h1 class="w3-xxlarge w3-text-white">
-        <span class="w3-padding w3-black w3-opacity-min">
-            Ocuvant
-        </span>
-        <span class="w3-hide-small w3-text-light-grey">Chat Window</span>
-      </h1>
-    </div>
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white">
+      <span class="w3-padding w3-black w3-opacity-min">
+        Ocuvant
+      </span>
+      <span class="w3-hide-small w3-text-light-grey">Chat Window</span>
+    </h1>
   </div>
+</div>
 
-  <div id="chatbox" class="w3-container w3-padding-32 w3-border" style="height:100vh; overflow:scroll">
-      
-    </div>
 
-    <div class="w3-container" style="position:fixed;bottom:0; width:100%" >
-        <form id='form'>
-          <input id="message" type="text" name="message" placeholder="type your message here" style="height: 50px; width:90%; background-color:black">
-          <input type="submit" value="Submit">
-        </form> 
-      </div>
+<div id="chatbox" class="w3-container w3-padding-32 w3-border" style="height:100vh; overflow:scroll">
+  <button id="beginChat" class="w3-button" onclick="beginChat()"> Begin Chatting </button>
+</div>
 
-    
-
-{% endblock %}
+<div id="message-bar" class="w3-container" style="position:fixed;bottom:0; width:100%; display:none">
+  <form id='form'>
+    <input id="message" type="text" name="message" placeholder="type your message here" style="height: 50px; width:90%; background-color:black">
+    <input type="submit" value="Submit">
+  </form>
+</div>
+ {% endblock %}

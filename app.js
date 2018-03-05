@@ -98,9 +98,7 @@ app.get('/chatboxes', function (req, res) {
   if (req.user) {
     sendObj.user = req.user
   }
-  console.log(Object.values(chatRooms))
   sendObj.chats = Object.values(chatRooms)
-  console.log(sendObj)
   res.render('chatboxes', sendObj)
 })
 
@@ -247,48 +245,9 @@ function isLoggedIn(req, res, next) {
 models.db.sync()
   .then(() => {
     http.listen(1337, () => {
-      console.log('yo server be listenin on 1337');
+      console.log('Server listening on PORT: 1337');
     });
   })
 
-
-
-io.on('connection', function (socket) {
-  console.log('a user connected');
-
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-  });
-
-  //socket message listener
-  socket.on("message", function (message) {
-    socket.broadcast.to(socket.room).emit('message', message)
-  })
-
-  socket.on('admin', (admin) => {
-    admins[admin] = socket;
-    socket.join('admins')
-  })
-
-  socket.on('joinChatRoom', room => {
-    console.log(room)
-    socket.join(room)
-    socket.room = room
-    io.to('admins').emit('newChat', room)
-    chatRooms[room] = {
-      name: room,
-      admins: []
-    }
-    console.log(Object.values(chatRooms))
-  })
-
-  socket.on('adminJoin', (room, admin) => {
-    socket.join(room)
-    socket.room = room
-    socket.broadcast.to(room).emit('adminJoin')
-    var copy = chatRooms[room].admins.slice();
-    copy.push(admin)
-    chatRooms[room].admins = copy
-    console.log('joined')
-  })
-});
+//socket connection
+require('./config/socket')(io, admins, chatRooms)

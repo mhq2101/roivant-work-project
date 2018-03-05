@@ -14,7 +14,6 @@
     "email": "^0.2.6",
     "express": "^4.15.5",
     "html2plaintext": "^2.0.1",
-    "mandrill-api": "^1.0.45",
     "nodemailer": "^4.6.0",
     "nunjucks": "^3.0.1",
     "pg": "6.4.1",
@@ -29,9 +28,6 @@
     "cookie-parser": "~1.4.3",
     "method-override": "~2.3.6",
     "express-session": "~1.14.1",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
     "immutable": "^3.8.1"
   }
 }

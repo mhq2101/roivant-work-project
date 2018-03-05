@@ -1,12 +1,21 @@
-
+var socket = io();
+function beginChat() {
+  socket.emit('joinChatRoom', document.getElementById("sessionID").innerHTML)
+  document.getElementById('beginChat').setAttribute('style', "display:none")
+  $("#chatbox").append("<h1 id='loading' >Please wait... a representative will be with you momentarily. Thank you for your patience<h1>")
+}
+var joinRoom = function (e) {
+  var admin = document.getElementById('user').innerHTML
+  socket.emit('adminJoin', e.target.innerHTML, admin)
+  document.getElementById('currentChat').innerHTML = 'Connected: ' + e.target.innerHTML
+}
 window.onload = function () {
-  var socket = io();
+
   if (document.getElementById('user')) {
-    console.log('hello')
     socket.name = document.getElementById('user').innerHTML
-    console.log(socket.name)
     socket.emit('admin', socket.name)
   }
+
 
   if (document.getElementById('form')) {
     document.getElementById('form').onsubmit = function (e) {
@@ -19,39 +28,27 @@ window.onload = function () {
     }
   }
 
-  var joinRoom = function(e) {
-    e.preventDefault();
-    var admin = document.getElementById('user').innerHTML
-    console.log('laksldfk')
-    socket.emit('adminJoin', e.target.innerHTML, admin)
-  }
+  
 
   if (document.getElementById('joinRoom')) {
-    document.querySelector('#joinRoom').forEach(link => {
+    document.querySelectorAll('#joinRoom').forEach(link => {
       link.onclick = joinRoom
     })
   }
 
 
   function sendMessage(message) {
-    if ($("#chatbox").children().length === 0) {
-      if (!document.getElementById('user'))
-        console.log(document.getElementById("sessionID").innerHTML)
-      socket.emit('joinChatRoom', document.getElementById("sessionID").innerHTML)
-    }
     socket.emit('message', message)
   }
 
   socket.on('message', (message) => {
     var date = new Date();
-    console.log(message)
     $("#chatbox").append(`<div class='container2 darker'><img src='/images/vegeta.jpg' alt='Avatar' class='right' style='width:100%;'><p>${message}</p><span class='time-right'>${date.getHours().toString() + ':' + date.getMinutes().toString()}</span></div>`)
   })
 
   socket.on('newChat', (sessionID) => {
     window.alert('New User Live Chat Available')
     if (document.getElementById("chatboxes")) {
-      console.log('this also happend')
       var listItem = document.createElement('li');
       listItem.setAttribute('id', 'joinRoom');
       listItem.innerHTML += sessionID;
@@ -59,6 +56,12 @@ window.onload = function () {
       listItem.setAttribute('style', 'cursor:pointer')
       document.getElementById('chatboxes').appendChild(listItem)
     }
+  })
+
+  socket.on('adminJoin', (admin) => {
+    $("#loading").remove();
+    document.getElementById("message-bar").setAttribute('style', "position:fixed;bottom:0; width:100%;")
+    $("#chatbox").append(`<h3 class="w3-center">${admin} has joined</h3>`)
   })
 }
 
